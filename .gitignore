@@ -1,0 +1,10 @@
+.codex
+__pycache__/
+*.pyc
+
+passes/asan_mem1_pass/*.so
+
+artifacts/generated/**
+artifacts/layout/**
+artifacts/poc/**
+artifacts/reports/**
