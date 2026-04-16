@@ -8,7 +8,7 @@
 이 저장소는 Emscripten/LLVM 기반 Wasm AddressSanitizer를 그대로 활용하면서, shadow memory 접근만 `memory 1`로 리디렉션하는 실험 파이프라인을 구현한 프로젝트입니다.  
 핵심 목표는 "기존 ASan의 탐지 행위를 최대한 유지하면서도, 단일 메모리 구조에서 가능한 shadow 오염 가능성을 구조적으로 줄일 수 있는가?"를 검증하는 것입니다.
 
-단순히 아이디어를 적어둔 수준이 아니라, 실제로 아래 흐름까지 재현할 수 있게 정리했습니다.
+실제로 아래 흐름까지 재현할 수 있게 정리했습니다.
 
 - LLVM pass로 인라인 shadow 접근을 helper 호출로 추상화
 - WAT rewrite 단계에서 shadow 관련 load/store를 `memory 1`로 이동
@@ -23,7 +23,7 @@
 - 엔지니어링 관점: 아이디어 설명이 아니라, 재현 가능한 스크립트와 비교 리포트까지 갖춘 형태입니다.
 - 포트폴리오 관점: 시스템/컴파일러/보안/성능 측정을 한 저장소 안에서 보여줄 수 있습니다.
 
-## 핵심 구현 포인트
+## 구현 포인트
 
 1. `passes/asan_mem1_pass`
    인라인 ASan shadow 접근을 `__asan_shadow_load8`, `__asan_shadow_store*` helper 호출로 치환하는 LLVM pass가 들어 있습니다.
@@ -119,11 +119,9 @@
 - [Compact mem1 비교 표](./docs/asan_compact_behavior_matrix.md)
 - [선택 기능 비교](./docs/asan_optional_features.md)
 
-## 이 저장소가 보여주는 역량
+## 요약
 
 - LLVM pass 작성과 IR 수준 변환 설계
 - Wasm/WAT 수준 메모리 재배치 및 runtime 적응
 - 보안 가설을 실험 가능한 코드와 리포트로 연결하는 능력
 - 성능 측정 자동화와 결과 구조화
-
-논문 초안용 실험 저장소이면서도, 포트폴리오 관점에서 봐도 "아이디어, 구현, 검증"이 한 번에 보이도록 다듬은 버전입니다.
