@@ -16,7 +16,7 @@
 - compact mem1 변형과 PolyBench 벤치마크 실험 스크립트 제공
 - mini PoC로 single-memory 대비 multi-memory 분리 효과 시각화
 
-## 왜 이 프로젝트가 흥미로운가
+## 시사점
 
 - 보안 관점: shadow metadata를 애플리케이션 메모리와 물리적으로 분리하는 실험입니다.
 - 컴파일러 관점: C/C++ → LLVM IR → wasm/wat 단계까지 여러 층을 직접 연결합니다.
